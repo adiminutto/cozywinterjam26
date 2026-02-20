@@ -15,7 +15,6 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="CozyWinterJam26"
-run/main_scene="uid://cklrwa8b3hp8o"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -95,3 +94,8 @@ shift={
 2d_physics/layer_1="static"
 2d_physics/layer_2="dynamic"
 2d_physics/layer_3="danger"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

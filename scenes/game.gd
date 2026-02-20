@@ -1,10 +1,67 @@
 extends Node
 class_name Game
 
-func _process(delta: float) -> void:
+var clients: Array[Client] = []
+
+###
+# TODO: Script the tile map layer
+###
+
+
+class Decoration:
+	extends Game
+	
+	var item_name: String = ""
+	var cost: float = 0
+	var tier: int = 0 # what tier does it become available
+	
+	# What vibes does the furniture give?
+	var moods: Array[String] = []
+	# From a range of 1 - 5 how fancy is the furniture?
+	var fancy: int = 1
+	
+	func _ready() -> void:
+		pass
+	
+class Client:
+	extends Game
+	
+	# Clients are tiered 1 - 5
+	var tier = 0
+	var mood = ""
+	var dialogue = {
+		"intro": {
+			
+		},
+		"requirements": {
+			
+		},
+	}
+	
+	var requirements = {
+		
+	}
+	
+	# how much money they payout to the player
+	var payment: float = 2000
+	
+	func _ready() -> void:
+		pass
+	
 	pass
+
+class Player:
+	extends Game
 	
-func _ready() -> void:
-	pass
+	# what tier is the player at, this dictates the decorations avail and the client
+	var tier: int = 1 
 	
+	var funds: float = 1000
 	
+	# Dict[String, Array[Decoration]]
+	var decorations: Dictionary = {}
+	
+	func _ready() -> void:
+		# load decorations
+		
+		pass
