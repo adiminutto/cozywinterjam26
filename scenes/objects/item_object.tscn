@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://hlm6w5oml407"]
+
+[ext_resource type="Script" uid="uid://cx273cutc1lby" path="res://scenes/objects/item_object.gd" id="1_a7kxv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vjqwc"]
+size = Vector2(32, 32)
+
+[node name="ItemObject" type="Node2D" unique_id=197436072]
+script = ExtResource("1_a7kxv")
+
+[node name="Entity" type="Area2D" parent="." unique_id=1576624140]
+
+[node name="ItemSprite" type="Sprite2D" parent="Entity" unique_id=1781904250]
+texture = SubResource("PlaceholderTexture2D_vjqwc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entity" unique_id=1714787964]
+
+[connection signal="input_event" from="Entity" to="." method="_on_entity_input_event"]

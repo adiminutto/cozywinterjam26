@@ -3,10 +3,27 @@ class_name Game
 
 var clients: Array[Client] = []
 
+var player
 ###
 # TODO: Script the tile map layer
 ###
 
+func _add_funds(amt) -> void:
+	print(amt)
+	print(player.funds)
+	var temp_funds = player.funds
+	temp_funds += amt
+	if temp_funds < 0:
+		EventBus.transaction_success.emit(false)
+	else:
+		player.funds += amt
+		EventBus.transaction_success.emit(true)
+
+func _ready() -> void:
+	player = Player.new()
+	print("PLAYER: %s" % player)
+	print(player.funds)
+	EventBus.add_funds.connect(_add_funds)
 
 class Decoration:
 	extends Game
@@ -60,8 +77,8 @@ class Player:
 	
 	# Dict[String, Array[Decoration]]
 	var decorations: Dictionary = {}
+
 	
 	func _ready() -> void:
 		# load decorations
-		
 		pass

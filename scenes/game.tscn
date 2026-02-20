@@ -1,59 +1,151 @@
-[gd_scene format=3 uid="uid://clc3l1q6d3v1a"]
+[gd_scene format=4 uid="uid://clc3l1q6d3v1a"]
 
 [ext_resource type="Script" uid="uid://censafx8u4471" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bp8btc8agqc40" path="res://scenes/levels/level.tscn" id="3_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://te3atmirt6bd" path="res://assets/tileset/house_tileset.png" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://mdfsjn6fsetn" path="res://scenes/decoration_shop.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://ih5j2u8jxg5a" path="res://scenes/editor_object.tscn" id="4_u5sy4"]
+[ext_resource type="Script" uid="uid://ceqxeun5mn2kk" path="res://scenes/camera_2d.gd" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://ywq3v5ws661l" path="res://scenes/tools.tscn" id="7_u5sy4"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("3_lnu2h")
 texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
 1:0/0 = 0
+1:0/0/texture_origin = Vector2i(16, 0)
 2:0/0 = 0
+2:0/0/texture_origin = Vector2i(16, 0)
 7:0/0 = 0
+7:0/0/texture_origin = Vector2i(16, 0)
 8:0/0 = 0
+8:0/0/texture_origin = Vector2i(16, 0)
 9:0/0 = 0
+9:0/0/texture_origin = Vector2i(16, 0)
 0:1/0 = 0
+0:1/0/texture_origin = Vector2i(16, 0)
 1:1/0 = 0
+1:1/0/texture_origin = Vector2i(16, 0)
 2:1/0 = 0
+2:1/0/texture_origin = Vector2i(16, 0)
 3:1/0 = 0
+3:1/0/texture_origin = Vector2i(16, 0)
 4:1/0 = 0
+4:1/0/texture_origin = Vector2i(16, 0)
 5:1/0 = 0
+5:1/0/texture_origin = Vector2i(16, 0)
 6:1/0 = 0
+6:1/0/texture_origin = Vector2i(16, 0)
 0:2/0 = 0
+0:2/0/texture_origin = Vector2i(16, 0)
 2:2/0 = 0
+2:2/0/texture_origin = Vector2i(16, 0)
 3:2/0 = 0
+3:2/0/texture_origin = Vector2i(16, 0)
 4:2/0 = 0
+4:2/0/texture_origin = Vector2i(16, 0)
 5:2/0 = 0
+5:2/0/texture_origin = Vector2i(16, 0)
 6:2/0 = 0
+6:2/0/texture_origin = Vector2i(16, 0)
 0:3/0 = 0
+0:3/0/texture_origin = Vector2i(16, 0)
 1:3/0 = 0
+1:3/0/texture_origin = Vector2i(16, 0)
 2:3/0 = 0
+2:3/0/texture_origin = Vector2i(16, 0)
 3:3/0 = 0
+3:3/0/texture_origin = Vector2i(16, 0)
 4:3/0 = 0
+4:3/0/texture_origin = Vector2i(16, 0)
 5:3/0 = 0
+5:3/0/texture_origin = Vector2i(16, 0)
 6:3/0 = 0
+6:3/0/texture_origin = Vector2i(16, 0)
 0:4/0 = 0
+0:4/0/texture_origin = Vector2i(16, 0)
 1:4/0 = 0
+1:4/0/texture_origin = Vector2i(16, 0)
 2:4/0 = 0
+2:4/0/texture_origin = Vector2i(16, 0)
 3:4/0 = 0
+3:4/0/texture_origin = Vector2i(16, 0)
 4:4/0 = 0
+4:4/0/texture_origin = Vector2i(16, 0)
 5:4/0 = 0
+5:4/0/texture_origin = Vector2i(16, 0)
 6:4/0 = 0
+6:4/0/texture_origin = Vector2i(16, 0)
 3:5/0 = 0
+3:5/0/texture_origin = Vector2i(16, 0)
 4:5/0 = 0
+4:5/0/texture_origin = Vector2i(16, 0)
 5:5/0 = 0
+5:5/0/texture_origin = Vector2i(16, 0)
 6:5/0 = 0
+6:5/0/texture_origin = Vector2i(16, 0)
 5:6/0 = 0
+5:6/0/texture_origin = Vector2i(16, 0)
 6:6/0 = 0
+6:6/0/texture_origin = Vector2i(16, 0)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(16, 0)
 
 [sub_resource type="TileSet" id="TileSet_uwrxv"]
 tile_size = Vector2i(32, 32)
 custom_data_layer_0/name = "player_placed"
 custom_data_layer_0/type = 1
-sources/0 = SubResource("TileSetAtlasSource_yqjtg")
+sources/0 = SubResource("TileSetAtlasSource_iywne")
 
 [node name="Game" type="Node" unique_id=296375991]
 script = ExtResource("1_uwrxv")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=112887555]
+tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAADAAQAAAAAAAAAAAACAAQAAAAAAAAAAAABAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAMAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_uwrxv")
+
+[node name="Level" parent="." unique_id=1655249292 instance=ExtResource("3_lbhrr")]
+
+[node name="EditorObject" parent="." unique_id=333757575 instance=ExtResource("4_u5sy4")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1185510670]
+position = Vector2(578, 325)
+script = ExtResource("6_p57ef")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1253031886]
+
+[node name="DecorationShop" parent="CanvasLayer" unique_id=1564680268 instance=ExtResource("4_lbhrr")]
+offset_left = 755.0
+offset_top = 95.0
+offset_right = -6.0
+offset_bottom = 95.0
+
+[node name="Tools" parent="CanvasLayer" unique_id=662143022 instance=ExtResource("7_u5sy4")]
+
+[node name="Funds" type="Control" parent="CanvasLayer" unique_id=53780659]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1041.0
+offset_top = 42.0
+offset_right = 1141.0
+offset_bottom = 82.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Funds" unique_id=583105465]
+layout_mode = 0
+offset_right = 99.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Funds/Panel" unique_id=1592864301]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 41.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "1000"
+horizontal_alignment = 1

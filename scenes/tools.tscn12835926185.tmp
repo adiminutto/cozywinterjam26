@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ywq3v5ws661l"]
+
+[ext_resource type="Script" uid="uid://c2yth7ijwk5ff" path="res://scenes/tools.gd" id="1_nskjs"]
+
+[node name="Tools" type="Control" unique_id=662143022]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 852.0
+offset_top = 38.0
+offset_right = 1038.0
+offset_bottom = 84.0
+script = ExtResource("1_nskjs")
+
+[node name="ButtonBox" type="HBoxContainer" parent="." unique_id=319750594]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -20.0
+offset_right = 88.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlaceButton" type="Button" parent="ButtonBox" unique_id=217604127]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "PLACE
+"
+
+[node name="MoveButton" type="Button" parent="ButtonBox" unique_id=1618068194]
+layout_mode = 2
+toggle_mode = true
+text = "MOVE"
+
+[node name="EraseButton" type="Button" parent="ButtonBox" unique_id=916779608]
+layout_mode = 2
+toggle_mode = true
+text = "ERASE"

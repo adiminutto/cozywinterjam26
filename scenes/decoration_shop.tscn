@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://mdfsjn6fsetn"]
+
+[ext_resource type="Script" uid="uid://iny6u3tt6jtk" path="res://scenes/tab_container.gd" id="1_phg27"]
+[ext_resource type="PackedScene" uid="uid://muywkgktkov6" path="res://scenes/objects/menu_textures/bed_texture.tscn" id="1_qv754"]
+[ext_resource type="PackedScene" uid="uid://djwjfxdadnk6p" path="res://scenes/objects/menu_textures/chair_texture.tscn" id="3_naksc"]
+[ext_resource type="PackedScene" uid="uid://d3km6xskdoi6r" path="res://scenes/objects/menu_textures/window_texture.tscn" id="4_b3fjo"]
+[ext_resource type="PackedScene" uid="uid://ybql5l2nibms" path="res://scenes/objects/menu_textures/lamp_texture.tscn" id="5_3vcwv"]
+[ext_resource type="PackedScene" uid="uid://bw7e0nsoqut73" path="res://scenes/objects/menu_textures/painting_texture.tscn" id="6_ahyid"]
+
+[node name="DecorationShop" type="Control" unique_id=1564680268]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=709748909]
+layout_mode = 0
+offset_right = 388.0
+offset_bottom = 537.0
+current_tab = 0
+script = ExtResource("1_phg27")
+
+[node name="Lighting" type="TabBar" parent="TabContainer" unique_id=201227728]
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Lighting" unique_id=17911585]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Lighting/ScrollContainer" unique_id=1024355573]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Lighting/ScrollContainer/VBoxContainer" unique_id=1655317552]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 48
+
+[node name="WindowTexture" parent="TabContainer/Lighting/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=279609364 instance=ExtResource("4_b3fjo")]
+layout_mode = 2
+
+[node name="LampTexture" parent="TabContainer/Lighting/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1807539739 instance=ExtResource("5_3vcwv")]
+layout_mode = 2
+
+[node name="Sleeping" type="TabBar" parent="TabContainer" unique_id=2017491450]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Sleeping" unique_id=10972424]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = -6.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sleeping/ScrollContainer" unique_id=278607740]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Sleeping/ScrollContainer/VBoxContainer" unique_id=86705708]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 32
+
+[node name="BedTexture" parent="TabContainer/Sleeping/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1131105540 instance=ExtResource("1_qv754")]
+layout_mode = 2
+
+[node name="Seating" type="TabBar" parent="TabContainer" unique_id=147133419]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Seating" unique_id=580524227]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Seating/ScrollContainer" unique_id=302821947]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Seating/ScrollContainer/VBoxContainer" unique_id=317333457]
+layout_mode = 2
+
+[node name="Chair Texture" parent="TabContainer/Seating/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1767202108 instance=ExtResource("3_naksc")]
+layout_mode = 2
+
+[node name="Dining" type="TabBar" parent="TabContainer" unique_id=1652377400]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Dining" unique_id=1917716734]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Dining/ScrollContainer" unique_id=1898676985]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Dining/ScrollContainer/VBoxContainer" unique_id=1096327886]
+layout_mode = 2
+
+[node name="Entertainment" type="TabBar" parent="TabContainer" unique_id=942435113]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Entertainment" unique_id=2039710480]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Entertainment/ScrollContainer" unique_id=1271398359]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Entertainment/ScrollContainer/VBoxContainer" unique_id=927149161]
+layout_mode = 2
+
+[node name="Misc" type="TabBar" parent="TabContainer" unique_id=722897812]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Misc" unique_id=1550843407]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Misc/ScrollContainer" unique_id=1756008169]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Misc/ScrollContainer/VBoxContainer" unique_id=50321129]
+layout_mode = 2
+
+[node name="PaintingTexture" parent="TabContainer/Misc/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1779275751 instance=ExtResource("6_ahyid")]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="TabContainer" to="TabContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TabContainer" to="TabContainer" method="_on_mouse_exited"]
