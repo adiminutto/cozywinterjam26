@@ -514,4 +514,3 @@ theme_override_font_sizes/font_size = 24
 text = "{>.<}"
 
 [node name="Textbox" parent="." unique_id=1394967784 instance=ExtResource("8_gee14")]
-visible = false

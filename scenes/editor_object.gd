@@ -4,10 +4,9 @@ class_name EditorObject
 @onready var level: Level = $"../Level"
 
 @onready var cursor_sprite = $Sprite2D
-@onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
+@onready var tile_map_layer: TileMapLayer = $"../TileMapLayer2"
 
-@onready var level_tile_map = $"../Level/TileMapLayer"
-
+@onready var level_tile_map = $"../Level/TileMapLayer2"
 
 const TILE_SIZE = 32
 ## TOOLS

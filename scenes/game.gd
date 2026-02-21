@@ -3,6 +3,7 @@ class_name Game
 
 @onready var textbox: CanvasLayer = $Textbox
 @onready var level: Level = $Level
+@onready var submit_ui: MarginContainer = $CanvasLayer/SubmitUi
 
 var clients: Array[Client] = []
 
@@ -26,63 +27,168 @@ func _add_funds(amt) -> void:
 
 func _process_submission():
 	#{
-	#	"bed": {"count": 2, "tier": 2, "weight": 3},
-	#	"stove": {"count": 1, "tier": 3, "weight": 4},
-	#	"kitchen_sink": {"count": 1, "tier": 3, "weight": 4},
-	#	"fridge": {"count": 1, "tier": 3, "weight": 4},
-	#	"hanging_cabinet": {"count": 2, "tier": 3, "weight": 3},
-	#	"cabinet": {"count": 2, "tier": 3, "weight": 4},
-	#	"tv_stand": {"count": 1, "tier": 1, "weight": 2},
-	#	"tv": {"count": 1, "tier": 1, "weight": 5}
+	#	"bed": {"count": 2, "weight": 3},
+	#	"stove": {"count": 1, "weight": 4},
+	#	"kitchen_sink": {"count": 1, "weight": 4},
+	#	"fridge": {"count": 1, "weight": 4},
+	#	"hanging_cabinet": {"count": 2, "weight": 3},
+	#	"cabinet": {"count": 2, "weight": 4},
+	#	"tv_stand": {"count": 1, "weight": 2},
+	#	"tv": {"count": 1, "weight": 5}
+	#	"storage": {"count
 	#}
+	## TODO: ADD SUPPORT FOR STORAGE COUNTS
+	var client_under_tolerance_map = {
+		1: 0,
+		2: 1,
+		3: 1,
+		4: 1,
+		5: 2,
+		6: 2,
+		7: 2,
+		8: 3,
+		9: 3,
+		10: 3,
+	}
+	
 	score = 0
 	## We must eval the requirments vs what the player has submitted.
 	## First we must check the ratio of requirements the player submitted
 	## 
+	var missed_items = []
+	var item_over_tolerance = 2
+	var client_responses = {
+		"Good": [],
+		"Mid": [],
+		"Bad": []
+	}
+	
 	var req = client.requirements
 	var player_objects = level.get_children()
 	player_objects.remove_at(0)
 	var player_objects_dict = {}
 	for item in player_objects:
 		if not player_objects_dict.has(item.item_type):
-			player_objects_dict[item.item_type] = {"count": 1, "tiers": [item.item_tier]}
+			player_objects_dict[item.item_type] = {"count": 1}
 		else:
 			player_objects_dict[item.item_type]["count"] += 1
-			player_objects_dict[item.item_type]["tiers"].append(item.item_tier)
 			
 	print(player_objects_dict)
 	for item in req:
-		## Let's eval
+		# Eval one requirement item at a time
+		var item_score = 0
+		var item_categories = Definitions.ITEM_TO_CATEGORY_MAP[item]
 		if item in player_objects_dict:
-			## TODO: ADD DIALOGUE TOGGLES
-			var item_score = 0
 			var player_count = player_objects_dict[item]["count"]
 			var client_count = req[item]["count"]
+			var client_score = req[item]["weight"]
+			var item_under_tolerance = client_under_tolerance_map[client_count]
+			
 			var count_diff = player_count - client_count
 			if count_diff == 0:
 				## perfect match
-				item_score += client_count
+				item_score += client_score
+				## GOOD
+				if item_categories:
+					client_responses = response_dialogue_matcher(client_responses,item_categories[0],item,"Good","Default")
 				pass
-			if count_diff > 0:
-				## too many / spent too much
-				#item_score += req[item]["count"]
+			elif count_diff > 0:
+				## OVER
+				## There should be wiggle room here,
+				if count_diff <= item_over_tolerance:
+					## MID OVER
+					item_score += (client_score - count_diff)
+					
+					if item_categories:
+						client_responses = response_dialogue_matcher(client_responses,item_categories[0],item,"Mid","Over")
+				else:
+					## BAD OVER
+					## Too much budget spent here,  
+					item_score += 1
+					
+					if item_categories:
+						client_responses = response_dialogue_matcher(client_responses,item_categories[0],item,"Bad","Over")
 				pass
-			if count_diff < 0:
+			elif count_diff < 0:
 				## too little / spent too little
-				pass
-			
-			var tiers_count = player_objects_dict[item]["tiers"].count(req[item]["tier"])
-			if tiers_count >= client_count:
-				## perfect match
-				item_score += client_count
-			if tiers_count >= client_count/2 and tiers_count < client_count:
-				## okay match
-				item_score += client_count/2
-			if tiers_count < client_count/2:
-				## bad match
-				pass
+				## UNDER
+				if abs(count_diff) <= item_under_tolerance:
+					## MID
+					## Reward a few points
+					item_score += client_score / 2
+					
+					if item_categories:
+						client_responses = response_dialogue_matcher(client_responses,item_categories[0],item,"Mid","Under")
+				else:
+					## BAD
+					if item_categories:
+						client_responses = response_dialogue_matcher(client_responses,item_categories[0],item,"Bad","Under")
+					pass
+		else:
+			## PLAYER MISSED THIS ITEM ##
+			missed_items.append(item)
+			## BAD
+			if item_categories:
+				client_responses = response_dialogue_matcher(client_responses,item_categories[0],item,"Bad","Under")
+			pass
 		
+		score += item_score
+		
+	## TODO: OMISSIONS HANDLING
+	# including one quantity of omission is MID
+	# including more than one is BAD
+	print("CLIENT RESPONSES")
+	print(client_responses)
+	print("PLAYER SCORE")
+	print(score)
+	client.responses_queue = client_responses
+	client.change_state(client.ClientState.RESPONSE)
 	pass
+
+func response_dialogue_matcher(responses,category,item,res_quality,res_type):
+	if category:
+		if Definitions.CLIENT_1_RESPONSES[res_quality][category].get(item):
+			responses[res_quality].push_back(Definitions.CLIENT_1_RESPONSES[res_quality][category][item][res_type])
+		elif Definitions.CLIENT_1_RESPONSES[res_quality][category].get(res_type):
+			responses[res_quality].push_back(Definitions.CLIENT_1_RESPONSES[res_quality][category][res_type])
+		else:
+			if Definitions.CLIENT_1_RESPONSES[res_quality][category].get("Generic"):
+				if Definitions.CLIENT_1_RESPONSES[res_quality][category]["Generic"].get(res_type):
+					#responses[res_quality].push_back(Definitions.CLIENT_1_RESPONSES[res_quality][category]["Generic"][res_type])
+					pass
+			print("MISSING %s %s DIALOGUE FOR %s AND %s" % [res_quality, res_type, category, item])
+	return responses
+
+func score_grading():
+	var percent_score = round((score / Definitions.CLIENT_1_MAX_SCORE) * 100)
+	var grade
+	if percent_score == 100:
+		grade = "A+"
+	elif percent_score >= 93 and percent_score <= 99:
+		grade = "A"
+	elif percent_score >= 85 and percent_score <= 92:
+		grade = "A-"
+	elif percent_score >= 60 and percent_score <= 84:
+		grade = "B+"
+	elif percent_score >= 75 and percent_score <= 79:
+		grade = "B"
+	elif percent_score >= 70 and percent_score <= 74:
+		grade = "B-"
+	elif percent_score >= 67 and percent_score <= 69:
+		grade = "C+"
+	elif percent_score >= 63 and percent_score <= 66:
+		grade = "C"
+	elif percent_score >= 60 and percent_score <= 62:
+		grade = "C-"
+	elif percent_score >= 57 and percent_score <= 59:
+		grade = "D+"
+	elif percent_score >= 53 and percent_score <= 56:
+		grade = "D"
+	elif percent_score >= 50 and percent_score <= 52:
+		grade = "D-"
+	elif percent_score < 50:
+		grade = "F"
+	return grade
 
 func _process(delta: float) -> void:
 	if textbox.has_method("queue_text"):
@@ -103,6 +209,19 @@ func _process(delta: float) -> void:
 				pass
 			client.ClientState.RESPONSE:
 				## SHOW RESPONSES BASED ON PLAYERS EVALUTATION
+				print(client.responses_queue)
+				for category in client.responses_queue:
+					for response in client.responses_queue[category]:
+						textbox.queue_text(response)
+				submit_ui.hide()
+				## TODO: Display user score
+				## TODO: Add player restart option and player advance option
+				client.change_state(client.ClientState.END)
+			client.ClientState.END:
+				#print("YOUR SCORE: %s" % score)
+				var grade = score_grading()
+				print("Evaluating the design based on the clients requirements you scored %s points out of %s." % [score, Definitions.CLIENT_1_MAX_SCORE])
+				print("That means your overall grade is %s!" % grade)
 				pass
 	pass
 
@@ -151,20 +270,10 @@ class Client:
 	func _on_set_text(dialogue_dict):
 		intro_dialogue = dialogue_dict["intro"]
 		req_dialogue = dialogue_dict["requirements"]
-		#great_responses = dialogue_dict["great_responses"]
-		#good_responses = dialogue_dict["good_responses"]
-		#mid_responses = dialogue_dict["mid_responses"]
-		#bad_responses = dialogue_dict["bad_responses"]
-		#terrible_responses = dialogue_dict["terrible_responses"]
 		
 	var intro_dialogue
+	
 	var req_dialogue
-	## TODO: RESPONSE DIALOGUE
-	var great_responses
-	var good_responses
-	var mid_responses
-	var bad_responses
-	var terrible_responses
 	
 	var requirements
 	
@@ -173,11 +282,14 @@ class Client:
 	
 	var current_state
 	
+	var responses_queue
+	
 	enum ClientState {
 		INTRO,
 		REQ,
 		WAIT,
-		RESPONSE
+		RESPONSE,
+		END
 	}
 	
 	func change_state(next_state):
@@ -187,9 +299,13 @@ class Client:
 				print("Changing state to: State.INTRO")
 			ClientState.REQ:
 				print("Changing state to: State.REQ")
+			ClientState.WAIT:
+				print("Changing state to: State.WAIT")
 			ClientState.RESPONSE:
 				print("Changing state to: State.RESPONSE")
-	
+			ClientState.END:
+				print("Changing state to: State.END")
+			
 	func _ready() -> void:
 		#textbox.text_queue.push_back(intro_dialogue)
 		super._ready()
