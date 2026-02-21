@@ -2,9 +2,11 @@ extends Node
 class_name Game
 
 @onready var textbox: CanvasLayer = $Textbox
+@onready var level: Level = $Level
 
 var clients: Array[Client] = []
 
+var score
 var player
 var client
 ###
@@ -21,6 +23,66 @@ func _add_funds(amt) -> void:
 	else:
 		player.funds += amt
 		EventBus.transaction_success.emit(true)
+
+func _process_submission():
+	#{
+	#	"bed": {"count": 2, "tier": 2, "weight": 3},
+	#	"stove": {"count": 1, "tier": 3, "weight": 4},
+	#	"kitchen_sink": {"count": 1, "tier": 3, "weight": 4},
+	#	"fridge": {"count": 1, "tier": 3, "weight": 4},
+	#	"hanging_cabinet": {"count": 2, "tier": 3, "weight": 3},
+	#	"cabinet": {"count": 2, "tier": 3, "weight": 4},
+	#	"tv_stand": {"count": 1, "tier": 1, "weight": 2},
+	#	"tv": {"count": 1, "tier": 1, "weight": 5}
+	#}
+	score = 0
+	## We must eval the requirments vs what the player has submitted.
+	## First we must check the ratio of requirements the player submitted
+	## 
+	var req = client.requirements
+	var player_objects = level.get_children()
+	player_objects.remove_at(0)
+	var player_objects_dict = {}
+	for item in player_objects:
+		if not player_objects_dict.has(item.item_type):
+			player_objects_dict[item.item_type] = {"count": 1, "tiers": [item.item_tier]}
+		else:
+			player_objects_dict[item.item_type]["count"] += 1
+			player_objects_dict[item.item_type]["tiers"].append(item.item_tier)
+			
+	print(player_objects_dict)
+	for item in req:
+		## Let's eval
+		if item in player_objects_dict:
+			## TODO: ADD DIALOGUE TOGGLES
+			var item_score = 0
+			var player_count = player_objects_dict[item]["count"]
+			var client_count = req[item]["count"]
+			var count_diff = player_count - client_count
+			if count_diff == 0:
+				## perfect match
+				item_score += client_count
+				pass
+			if count_diff > 0:
+				## too many / spent too much
+				#item_score += req[item]["count"]
+				pass
+			if count_diff < 0:
+				## too little / spent too little
+				pass
+			
+			var tiers_count = player_objects_dict[item]["tiers"].count(req[item]["tier"])
+			if tiers_count >= client_count:
+				## perfect match
+				item_score += client_count
+			if tiers_count >= client_count/2 and tiers_count < client_count:
+				## okay match
+				item_score += client_count/2
+			if tiers_count < client_count/2:
+				## bad match
+				pass
+		
+	pass
 
 func _process(delta: float) -> void:
 	if textbox.has_method("queue_text"):
@@ -49,6 +111,7 @@ func _ready() -> void:
 	print("PLAYER: %s" % player)
 	print(player.funds)
 	EventBus.add_funds.connect(_add_funds)
+	EventBus.submission.connect(_process_submission)
 	client = Client.new()
 	client.dialogue = Definitions.CLIENT_1_DIALOGUE
 	client.requirements = Definitions.CLIENT_1_REQUIREMENTS
@@ -116,11 +179,6 @@ class Client:
 		WAIT,
 		RESPONSE
 	}
-	
-	#func queue_up_dialogue(text_array):
-		#print("TEXT ARRAY")
-		#print(text_array)
-		
 	
 	func change_state(next_state):
 		current_state = next_state

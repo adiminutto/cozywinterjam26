@@ -8,6 +8,7 @@ size = Vector2(32, 64)
 
 [node name="ItemTallWindow" unique_id=197436072 instance=ExtResource("1_s5hpc")]
 item_type = "window"
+item_tier = 3
 price = 200.0
 valid_tiles = Array[String](["is_wall"])
 

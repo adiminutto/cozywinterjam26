@@ -8,6 +8,7 @@ size = Vector2(32, 64)
 
 [node name="ItemLamp" unique_id=197436072 instance=ExtResource("1_y5gmw")]
 item_type = "lighting"
+item_tier = 2
 price = 60.0
 valid_tiles = Array[String](["is_floor", "is_wall"])
 place_on_objects = true

@@ -2,6 +2,7 @@ extends Node2D
 class_name ItemObject
 
 @export var item_type: String
+@export var item_tier: int
 @export var price: float
 @export var valid_tiles: Array[String]
 ## ["is_floor","is_wall"]

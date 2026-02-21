@@ -150,7 +150,7 @@ script = ExtResource("6_vtaks")
 offset_left = 755.0
 offset_top = 95.0
 offset_right = -6.0
-offset_bottom = 95.0
+offset_bottom = -15.0
 
 [node name="Tools" parent="CanvasLayer" unique_id=662143022 instance=ExtResource("7_u5sy4")]
 
@@ -458,4 +458,60 @@ theme_override_fonts/font = ExtResource("9_0tnpc")
 theme_override_font_sizes/font_size = 24
 text = "{>.<}"
 
+[node name="SubmitUi" type="MarginContainer" parent="CanvasLayer" unique_id=1284735427]
+offset_left = 819.0
+offset_top = 530.0
+offset_right = 1077.0
+offset_bottom = 594.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/SubmitUi" unique_id=1594788431]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vtaks")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SubmitUi" unique_id=785344589]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="Panel" type="Panel" parent="CanvasLayer/SubmitUi/MarginContainer" unique_id=1415461387]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/SubmitUi/MarginContainer" unique_id=547160189]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/SubmitUi/MarginContainer/HBoxContainer" unique_id=443647833]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 24
+text = "{^.-}"
+
+[node name="SubmitButton" type="Button" parent="CanvasLayer/SubmitUi/MarginContainer/HBoxContainer" unique_id=306006122]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvpfn")
+text = "SUBMIT DESIGN"
+
+[node name="Label3" type="Label" parent="CanvasLayer/SubmitUi/MarginContainer/HBoxContainer" unique_id=1886395738]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 24
+text = "JOURNAL"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/SubmitUi/MarginContainer/HBoxContainer" unique_id=661106394]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 24
+text = "{>.<}"
+
 [node name="Textbox" parent="." unique_id=1394967784 instance=ExtResource("8_gee14")]
+visible = false

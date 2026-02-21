@@ -8,6 +8,7 @@ size = Vector2(32, 64)
 
 [node name="ItemBed" unique_id=197436072 instance=ExtResource("1_pbr5k")]
 item_type = "bed"
+item_tier = 2
 price = 100.0
 valid_tiles = Array[String](["is_floor"])
 

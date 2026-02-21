@@ -19,7 +19,7 @@ mouse_filter = 1
 [node name="TabContainer" type="TabContainer" parent="." unique_id=709748909]
 layout_mode = 0
 offset_right = 388.0
-offset_bottom = 537.0
+offset_bottom = 418.0
 current_tab = 0
 script = ExtResource("1_phg27")
 
