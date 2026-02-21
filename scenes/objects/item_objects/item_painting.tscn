@@ -7,7 +7,9 @@
 size = Vector2(64, 32)
 
 [node name="ItemPainting" unique_id=197436072 instance=ExtResource("1_10fpw")]
+item_type = "decoration"
 price = 75.0
+valid_tiles = Array[String](["is_wall"])
 
 [node name="ItemSprite" parent="Entity" parent_id_path=PackedInt32Array(1576624140) index="0" unique_id=1781904250]
 texture = ExtResource("2_10fpw")

@@ -7,7 +7,9 @@
 size = Vector2(32, 31)
 
 [node name="ItemChair" unique_id=197436072 instance=ExtResource("1_yi27c")]
+item_type = "seating"
 price = 50.0
+valid_tiles = Array[String](["is_floor"])
 
 [node name="ItemSprite" parent="Entity" parent_id_path=PackedInt32Array(1576624140) index="0" unique_id=1781904250]
 texture = ExtResource("2_yi27c")

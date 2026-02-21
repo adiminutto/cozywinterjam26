@@ -46,20 +46,28 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 	# We can use level script to communicate between the tilemap and the object positions
-	print(level.world_to_cell(global_position))
+	#print(level.world_to_cell(global_position))
 	#print(level_tile_map.get_cell_tile_data(level.world_to_cell(global_position)))
 	
 	## PLACE LOGIC ##
 	if place_toggle:
+		#print(hover_item)
 		if ( current_item != null and can_place and Input.is_action_just_pressed("left_click")):
 			var new_item = current_item.instantiate()
+			
+			## VALIDATE THAT TILE PLACEMENT IS VALID
 			var tile_data = level_tile_map.get_cell_tile_data(level.world_to_cell(global_position))
 			var valid_tiles = new_item.valid_tiles
 			var valid_placement = false
 			for tile_flag in valid_tiles:
 				if tile_data and tile_data.get_custom_data(tile_flag):
 					valid_placement = true
-					
+			
+			## VALIDATE OBJECT PLACEMENT
+			if hover_item:
+				if hover_item.item_type not in new_item.valid_objects:
+					valid_placement = false
+			
 			if valid_placement:
 				## VERIFY PLAYER HAS FUNDS ##
 				print(new_item.price)
@@ -94,12 +102,25 @@ func _process(delta: float) -> void:
 			## TODO: ADD DRAG SOUND EFFECT
 		if (dragging and Input.is_action_just_released("left_click")):
 			if hover_item:
-				# Basically we tried to place on top of another object so
-				# lets reset to previous valid pos
-				moving_item.global_position = initial_pos
+				## VALIDATE OBJECT PLACEMENT
+				if hover_item.item_type not in moving_item.valid_objects:
+					# Basically we tried to place on top of another object so
+					# lets reset to previous valid pos
+					moving_item.global_position = initial_pos
 			else:
-				moving_item.global_position.x = ((round(global_position.x / TILE_SIZE)) * TILE_SIZE)
-				moving_item.global_position.y = ((round(global_position.y / TILE_SIZE)) * TILE_SIZE)
+				## VALIDATE THAT TILE PLACEMENT IS VALID
+				var tile_data = level_tile_map.get_cell_tile_data(level.world_to_cell(global_position))
+				var valid_tiles = moving_item.valid_tiles
+				var valid_placement = false
+				for tile_flag in valid_tiles:
+					if tile_data and tile_data.get_custom_data(tile_flag):
+						valid_placement = true
+				
+				if valid_placement:
+					moving_item.global_position.x = ((round(global_position.x / TILE_SIZE)) * TILE_SIZE)
+					moving_item.global_position.y = ((round(global_position.y / TILE_SIZE)) * TILE_SIZE)
+				else:
+					moving_item.global_position = initial_pos
 			dragging = false
 			# Make object selectable again
 			moving_item.get_child(0).input_pickable = true

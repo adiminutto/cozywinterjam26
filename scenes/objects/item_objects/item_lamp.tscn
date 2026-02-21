@@ -7,7 +7,11 @@
 size = Vector2(32, 64)
 
 [node name="ItemLamp" unique_id=197436072 instance=ExtResource("1_y5gmw")]
+item_type = "lighting"
 price = 60.0
+valid_tiles = Array[String](["is_floor", "is_wall"])
+place_on_objects = true
+valid_objects = Array[String](["bed", "seating", "table", "cabinet"])
 
 [node name="ItemSprite" parent="Entity" parent_id_path=PackedInt32Array(1576624140) index="0" unique_id=1781904250]
 texture = ExtResource("2_y5gmw")

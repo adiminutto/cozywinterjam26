@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://mdfsjn6fsetn" path="res://scenes/decoration_shop.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://ih5j2u8jxg5a" path="res://scenes/editor_object.tscn" id="4_u5sy4"]
 [ext_resource type="Script" uid="uid://ceqxeun5mn2kk" path="res://scenes/camera_2d.gd" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://cppm1sdtdsn0d" path="res://scenes/canvas_layer.gd" id="6_vtaks"]
 [ext_resource type="PackedScene" uid="uid://ywq3v5ws661l" path="res://scenes/tools.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://c02ar4dltls45" path="res://scenes/textbox.tscn" id="8_gee14"]
+[ext_resource type="FontFile" uid="uid://tga5xnrid4sp" path="res://assets/font/Born2bSportyV2.ttf" id="9_0tnpc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("3_lnu2h")
@@ -96,10 +99,39 @@ custom_data_layer_0/name = "player_placed"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_iywne")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gee14"]
+bg_color = Color(0.4132716, 0.6385213, 0.71962535, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tnpc"]
+bg_color = Color(0.4132716, 0.6385213, 0.71962535, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtaks"]
+bg_color = Color(0.4132716, 0.6385213, 0.71962535, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
+bg_color = Color(0.4132716, 0.6385213, 0.71962535, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
 [node name="Game" type="Node" unique_id=296375991]
 script = ExtResource("1_uwrxv")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=112887555]
+visible = false
 tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAADAAQAAAAAAAAAAAACAAQAAAAAAAAAAAABAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAMAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_uwrxv")
 
@@ -112,6 +144,7 @@ position = Vector2(578, 325)
 script = ExtResource("6_p57ef")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1253031886]
+script = ExtResource("6_vtaks")
 
 [node name="DecorationShop" parent="CanvasLayer" unique_id=1564680268 instance=ExtResource("4_lbhrr")]
 offset_left = 755.0
@@ -149,3 +182,280 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "1000"
 horizontal_alignment = 1
+
+[node name="ClientHistoryRox" type="MarginContainer" parent="CanvasLayer" unique_id=261009347]
+visible = false
+offset_left = 21.0
+offset_top = 14.0
+offset_right = 280.0
+offset_bottom = 509.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/ClientHistoryRox" unique_id=1290567873]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gee14")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ClientHistoryRox" unique_id=1275450359]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="Panel" type="Panel" parent="CanvasLayer/ClientHistoryRox/MarginContainer" unique_id=92621162]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer" unique_id=756691444]
+layout_mode = 2
+
+[node name="TitleBox" type="HBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=1016282833]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/TitleBox" unique_id=1024655456]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{^.-}"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/TitleBox" unique_id=464667079]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.69803923, 1, 1)
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "CLIENT HISTORY"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/TitleBox" unique_id=573667177]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{^.^}"
+horizontal_alignment = 1
+
+[node name="NameBox" type="HBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=657469651]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/NameBox" unique_id=1662312987]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "<"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/NameBox" unique_id=83255513]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "NAME: ROX WADDLES"
+
+[node name="Label2" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/NameBox" unique_id=866374494]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = ">"
+horizontal_alignment = 1
+
+[node name="IntroLabelBox" type="HBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=202488610]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/IntroLabelBox" unique_id=317226542]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{^.^}"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/IntroLabelBox" unique_id=1022739860]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.69803923, 1, 1)
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "INTRO"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/IntroLabelBox" unique_id=506655534]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{^.^}"
+horizontal_alignment = 1
+
+[node name="IntroTextBox" type="HBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=1071387201]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/IntroTextBox" unique_id=1653342849]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="IntroText" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/IntroTextBox" unique_id=628760806]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "Howdy, names Rox Waddles! Me and my huddle are looking for something small and cozy to spend the winter!"
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/IntroTextBox" unique_id=119913743]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="QuoteLabelBox" type="HBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=628108729]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteLabelBox" unique_id=848539497]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteLabelBox" unique_id=199966925]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.69803923, 1, 1)
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "QUOTES"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteLabelBox" unique_id=1351711034]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="QuoteBox" type="HBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=1019527205]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox" unique_id=2058537208]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="Quote" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox" unique_id=499082860]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "There's four of us! I'd prefer the two young'uns share a bed, y'know save on budget."
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox" unique_id=81854301]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="QuoteBox2" type="HBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=880311782]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox2" unique_id=407620627]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="Quote" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox2" unique_id=1993637970]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "My wife's always dreamed of a proper kitchen, it'd be nice to squeeze that into the budget."
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox2" unique_id=1001686330]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="QuoteBox3" type="HBoxContainer" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=1675225774]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox3" unique_id=1900821737]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="Quote" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox3" unique_id=1809718453]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "I can't miss curling! The New Zealander Crests play every Sunday and I simply CANNOT miss it!"
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer/QuoteBox3" unique_id=1238255751]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("9_0tnpc")
+text = "{>.<}"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/ClientHistoryRox/MarginContainer/VBoxContainer" unique_id=1134253198]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tnpc")
+text = "C L O S E"
+
+[node name="OpenJournalUi" type="MarginContainer" parent="CanvasLayer" unique_id=634718025]
+offset_left = 22.0
+offset_top = 15.0
+offset_right = 280.0
+offset_bottom = 79.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/OpenJournalUi" unique_id=193921190]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vtaks")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/OpenJournalUi" unique_id=331253598]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="Panel" type="Panel" parent="CanvasLayer/OpenJournalUi/MarginContainer" unique_id=1085990553]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/OpenJournalUi/MarginContainer" unique_id=1290640267]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/OpenJournalUi/MarginContainer/HBoxContainer" unique_id=1455308666]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 24
+text = "{^.-}"
+
+[node name="OpenButton" type="Button" parent="CanvasLayer/OpenJournalUi/MarginContainer/HBoxContainer" unique_id=1218689645]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvpfn")
+text = "OPEN JOURNAL"
+
+[node name="Label3" type="Label" parent="CanvasLayer/OpenJournalUi/MarginContainer/HBoxContainer" unique_id=1250667925]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 24
+text = "JOURNAL"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/OpenJournalUi/MarginContainer/HBoxContainer" unique_id=1879845211]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 24
+text = "{>.<}"
+
+[node name="Textbox" parent="." unique_id=1394967784 instance=ExtResource("8_gee14")]
