@@ -1,10 +1,52 @@
 [gd_scene format=3 uid="uid://mdfsjn6fsetn"]
 
+[ext_resource type="FontFile" uid="uid://tga5xnrid4sp" path="res://assets/font/Born2bSportyV2.ttf" id="1_86w4r"]
+[ext_resource type="Texture2D" uid="uid://pgqooc180nxj" path="res://assets/tileset/painting_small.png" id="1_lolql"]
 [ext_resource type="Script" uid="uid://iny6u3tt6jtk" path="res://scenes/tab_container.gd" id="1_phg27"]
-[ext_resource type="PackedScene" uid="uid://muywkgktkov6" path="res://scenes/objects/menu_textures/bed_texture.tscn" id="1_qv754"]
-[ext_resource type="PackedScene" uid="uid://djwjfxdadnk6p" path="res://scenes/objects/menu_textures/chair_texture.tscn" id="3_naksc"]
+[ext_resource type="PackedScene" uid="uid://muywkgktkov6" path="res://scenes/objects/menu_textures/bed_blue_texture.tscn" id="1_qv754"]
+[ext_resource type="Texture2D" uid="uid://d1i6cdp3s1516" path="res://assets/tileset/kitchen_sink.png" id="2_86w4r"]
+[ext_resource type="Texture2D" uid="uid://hu7lx5l418k5" path="res://assets/tileset/chair_blue.png" id="3_0qqwx"]
+[ext_resource type="PackedScene" uid="uid://djwjfxdadnk6p" path="res://scenes/objects/menu_textures/chair_blue_texture.tscn" id="3_naksc"]
+[ext_resource type="PackedScene" uid="uid://drkbyt874tcpm" path="res://scenes/objects/menu_textures/painting_small_texture.tscn" id="3_wbyis"]
+[ext_resource type="Texture2D" uid="uid://bgqolfcibfvlm" path="res://assets/tileset/tv_small.png" id="4_crrdl"]
 [ext_resource type="PackedScene" uid="uid://ybql5l2nibms" path="res://scenes/objects/menu_textures/lamp_texture.tscn" id="5_3vcwv"]
-[ext_resource type="PackedScene" uid="uid://bw7e0nsoqut73" path="res://scenes/objects/menu_textures/painting_texture.tscn" id="6_ahyid"]
+[ext_resource type="PackedScene" uid="uid://b6otn11gpcbkj" path="res://scenes/objects/menu_textures/sink_beige_texture.tscn" id="5_n1h4l"]
+[ext_resource type="PackedScene" uid="uid://gpdo4lwtnjc0" path="res://scenes/objects/menu_textures/stove_small_texture.tscn" id="6_1lfm3"]
+[ext_resource type="PackedScene" uid="uid://bw7e0nsoqut73" path="res://scenes/objects/menu_textures/painting_wide_texture.tscn" id="6_ahyid"]
+[ext_resource type="PackedScene" uid="uid://dh6e4drogpj2o" path="res://scenes/objects/menu_textures/cabinet_beige_big_doors.tscn" id="7_tg0wt"]
+[ext_resource type="PackedScene" uid="uid://fsv4swtg6wkt" path="res://scenes/objects/menu_textures/cabinet_beige_texture.tscn" id="8_wkrhc"]
+[ext_resource type="PackedScene" uid="uid://c3porcyvuehjx" path="res://scenes/objects/menu_textures/hanging_cabinet_beige_texture.tscn" id="9_fr3w5"]
+[ext_resource type="PackedScene" uid="uid://cc6b2g7qmyhah" path="res://scenes/objects/menu_textures/fridge_standard_texture.tscn" id="10_3ij3p"]
+[ext_resource type="PackedScene" uid="uid://ds0w3ff6xcab7" path="res://scenes/objects/menu_textures/fridge_dispenser_texture.tscn" id="11_n1h4l"]
+[ext_resource type="PackedScene" uid="uid://bsnrende4kf0r" path="res://scenes/objects/menu_textures/tv_big_texture.tscn" id="14_1lfm3"]
+[ext_resource type="PackedScene" uid="uid://d3oanntx5f4py" path="res://scenes/objects/menu_textures/tv_small_texture.tscn" id="15_fr3w5"]
+[ext_resource type="PackedScene" uid="uid://rxup7bpaan2l" path="res://scenes/objects/menu_textures/tv_stand_small.tscn" id="16_3ij3p"]
+[ext_resource type="PackedScene" uid="uid://3tuehb3766wa" path="res://scenes/objects/menu_textures/tv_stand_wide.tscn" id="17_dq0bq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86w4r"]
+bg_color = Color(0.4132716, 0.6385213, 0.71962535, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crrdl"]
+bg_color = Color(1, 0.7607843, 1, 1)
+border_width_top = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j10ul"]
+bg_color = Color(1, 0.7607843, 1, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qqwx"]
+bg_color = Color(1, 0.7607843, 1, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_color = Color(1, 1, 1, 1)
 
 [node name="DecorationShop" type="Control" unique_id=1564680268]
 layout_mode = 3
@@ -16,18 +58,33 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="TabContainer" type="TabContainer" parent="." unique_id=709748909]
+texture_filter = 1
 layout_mode = 0
-offset_right = 388.0
-offset_bottom = 418.0
-current_tab = 0
+offset_right = 400.0
+offset_bottom = 300.0
+theme_override_colors/font_selected_color = Color(0.3032326, 0.30323285, 0.30323347, 1)
+theme_override_colors/font_hovered_color = Color(0.3032326, 0.30323285, 0.30323347, 1)
+theme_override_colors/font_unselected_color = Color(0.3032326, 0.30323285, 0.30323347, 1)
+theme_override_fonts/font = ExtResource("1_86w4r")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_86w4r")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_crrdl")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_j10ul")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_0qqwx")
+current_tab = 1
+tab_0/icon = ExtResource("1_lolql")
+tab_1/icon = ExtResource("2_86w4r")
+tab_3/icon = ExtResource("3_0qqwx")
+tab_5/icon = ExtResource("4_crrdl")
 script = ExtResource("1_phg27")
 
-[node name="Misc" type="TabBar" parent="TabContainer" unique_id=722897812]
+[node name="Decor" type="TabBar" parent="TabContainer" unique_id=722897812]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Misc" unique_id=1550843407]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Decor" unique_id=1550843407]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,23 +96,28 @@ offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Misc/ScrollContainer" unique_id=1756008169]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Decor/ScrollContainer" unique_id=1756008169]
 layout_mode = 2
 theme_override_constants/separation = 64
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Misc/ScrollContainer/VBoxContainer" unique_id=50321129]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Decor/ScrollContainer/VBoxContainer" unique_id=50321129]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 72
 
-[node name="PaintingTexture" parent="TabContainer/Misc/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1779275751 instance=ExtResource("6_ahyid")]
+[node name="PaintingTexture" parent="TabContainer/Decor/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1779275751 instance=ExtResource("6_ahyid")]
+texture_filter = 1
 layout_mode = 2
 
-[node name="LampTexture" parent="TabContainer/Misc/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1807539739 instance=ExtResource("5_3vcwv")]
+[node name="PaintingSmall" parent="TabContainer/Decor/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1131105540 instance=ExtResource("3_wbyis")]
+texture_filter = 1
+layout_mode = 2
+
+[node name="LampTexture" parent="TabContainer/Decor/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1807539739 instance=ExtResource("5_3vcwv")]
+texture_filter = 1
 layout_mode = 2
 
 [node name="Kitchen" type="TabBar" parent="TabContainer" unique_id=201227728]
-visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 1
@@ -80,7 +142,34 @@ size_flags_vertical = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer" unique_id=1655317552]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.32
 theme_override_constants/separation = 72
+
+[node name="SinkBeige" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=687238819 instance=ExtResource("5_n1h4l")]
+layout_mode = 2
+
+[node name="StoveSmall" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1676773348 instance=ExtResource("6_1lfm3")]
+layout_mode = 2
+
+[node name="CabinetBeigeBigDoors" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1943082217 instance=ExtResource("7_tg0wt")]
+layout_mode = 2
+
+[node name="CabinetBeige" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=934121149 instance=ExtResource("8_wkrhc")]
+layout_mode = 2
+
+[node name="HangingCabinetBeige" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=770544180 instance=ExtResource("9_fr3w5")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer" unique_id=268071921]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 72
+
+[node name="FridgeStandard" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1886138529 instance=ExtResource("10_3ij3p")]
+layout_mode = 2
+
+[node name="FridgeDispenser" parent="TabContainer/Kitchen/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1726476811 instance=ExtResource("11_n1h4l")]
+layout_mode = 2
 
 [node name="Sleeping" type="TabBar" parent="TabContainer" unique_id=2017491450]
 visible = false
@@ -110,7 +199,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 72
 
-[node name="BedTexture" parent="TabContainer/Sleeping/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1131105540 instance=ExtResource("1_qv754")]
+[node name="BedTexture" parent="TabContainer/Sleeping/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1129429319 instance=ExtResource("1_qv754")]
 layout_mode = 2
 
 [node name="Seating" type="TabBar" parent="TabContainer" unique_id=147133419]
@@ -190,6 +279,18 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Entertainment/ScrollContainer/VBoxContainer" unique_id=927149161]
 layout_mode = 2
 theme_override_constants/separation = 72
+
+[node name="TVBig" parent="TabContainer/Entertainment/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=302417655 instance=ExtResource("14_1lfm3")]
+layout_mode = 2
+
+[node name="TVSmallTexture" parent="TabContainer/Entertainment/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1464001794 instance=ExtResource("15_fr3w5")]
+layout_mode = 2
+
+[node name="TVStandSmallTexture" parent="TabContainer/Entertainment/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1417339679 instance=ExtResource("16_3ij3p")]
+layout_mode = 2
+
+[node name="TVStandWideTexture" parent="TabContainer/Entertainment/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1089172691 instance=ExtResource("17_dq0bq")]
+layout_mode = 2
 
 [connection signal="mouse_entered" from="TabContainer" to="TabContainer" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer" to="TabContainer" method="_on_mouse_exited"]

@@ -1,8 +1,58 @@
 [gd_scene format=3 uid="uid://ywq3v5ws661l"]
 
 [ext_resource type="Script" uid="uid://c2yth7ijwk5ff" path="res://scenes/tools.gd" id="1_nskjs"]
+[ext_resource type="FontFile" uid="uid://tga5xnrid4sp" path="res://assets/font/Born2bSportyV2.ttf" id="2_xfx8p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nskjs"]
+bg_color = Color(0.4132716, 0.6385213, 0.71962535, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfx8p"]
+bg_color = Color(0.34777153, 0.6829646, 0.46699977, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tuurw"]
+bg_color = Color(0.34777153, 0.6829646, 0.46699977, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_nskjs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kglfk"]
+bg_color = Color(0.33888417, 0.6528518, 0.72397596, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjjoo"]
+bg_color = Color(0.33888417, 0.6528518, 0.72397596, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqomb"]
+bg_color = Color(0.7251755, 0.30623946, 0.40151045, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwdpp"]
+bg_color = Color(0.7251755, 0.30623946, 0.40151045, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 
 [node name="Tools" type="Control" unique_id=662143022]
 layout_mode = 3
@@ -13,36 +63,66 @@ offset_right = 1038.0
 offset_bottom = 84.0
 script = ExtResource("1_nskjs")
 
-[node name="ButtonBox" type="HBoxContainer" parent="." unique_id=319750594]
+[node name="Panel" type="Panel" parent="." unique_id=1980510390]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -5.0
+offset_right = 16.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nskjs")
+
+[node name="ButtonBox" type="HBoxContainer" parent="Panel" unique_id=319750594]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = -20.0
-offset_right = 88.0
-offset_bottom = 20.0
+offset_left = -100.0
+offset_top = -18.5
+offset_right = 100.0
+offset_bottom = 17.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
 
-[node name="PlaceButton" type="Button" parent="ButtonBox" unique_id=217604127]
+[node name="PlaceButton" type="Button" parent="Panel/ButtonBox" unique_id=217604127]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_xfx8p")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_xfx8p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tuurw")
 toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_nskjs")
 text = "PLACE
 "
 
-[node name="MoveButton" type="Button" parent="ButtonBox" unique_id=1618068194]
+[node name="MoveButton" type="Button" parent="Panel/ButtonBox" unique_id=1618068194]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_xfx8p")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_kglfk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qjjoo")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_nskjs")
 text = "MOVE"
 
-[node name="EraseButton" type="Button" parent="ButtonBox" unique_id=916779608]
+[node name="EraseButton" type="Button" parent="Panel/ButtonBox" unique_id=916779608]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_xfx8p")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_eqomb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gwdpp")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_nskjs")
 text = "ERASE"

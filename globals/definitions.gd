@@ -143,6 +143,14 @@ const CLIENT_2_DIALOGUE = {}
 const CLIENT_2_REQUIREMENTS = {}
 const CLIENT_2_PAYMENT = {}
 
+const SUBMISSION_DIALOGUE = {
+	1: "Submission saved. Contacting the client...",
+	2: "We got %s on hold, ready when you are!",
+	3: "Putting you through, good luck!",
+	4: "Hope the call with the client went well. I'll connect you to the Boss now, hold a moment...",
+	5: "Okay Boss is ready, putting you through."
+}
+
 const GRADE_DIALOGUE = {
 	"A+": "Absolutely astonishing work, we haven't heard a client that pleased in a few winters! You truly are a natural, we are very lucky to have you here at AIM!",
 	"A": "Oustanding work! The client was very happy. I hope you can keep this consistent with the other clients!",
@@ -157,6 +165,19 @@ const GRADE_DIALOGUE = {
 	"D": "",
 	"D-": "",
 	"F": "Wow, I know you're an intern but seriously? I mean what were you thinking. This is not gonna cut it here at AIM. Make things right or kiss this internship goodbye.",
+}
+
+const SCORE_DIALOGUE = {
+	1: "Boss is off the line! I hope everything went well! Anyways, while you were on call I ran the evaluation...",
+	2: "Evaluating the design based on the clients requirements you scored %s points out of %s.",
+	3: "That means your overall grade is %s.",
+	4: "Now, discussing with the client, based on your performance they are offering a compensation of %s. For reference they mentioned their cieling was %s.",
+	5: "How would you like to proceed?"
+}
+
+const END_GAME = {
+	1: "Looks like that's the last of the clients for now! With how well you're doing I'm sure we'll have more lining up in no time.",
+	2: "Thanks for playing! :) Developed by drewd. Special thanks to Jacqueline<3 for assisting with the dialogue!"
 }
 
 const TEXTBOX_START_SYMBOL = "{^.^}"

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cc6b2g7qmyhah"]
+
+[ext_resource type="Script" uid="uid://vji6jxpip2u3" path="res://scenes/objects/menu_textures/texture_rect.gd" id="1_i7fj7"]
+[ext_resource type="Texture2D" uid="uid://bqrlciu2x4sa5" path="res://assets/tileset/fridge_standard.png" id="1_x2an7"]
+[ext_resource type="PackedScene" uid="uid://c4eqpm8hrj77o" path="res://scenes/objects/item_objects/item_fridge_standard.tscn" id="3_0y8o8"]
+
+[node name="FridgeStandardTexture" type="Control" unique_id=1131105540]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=476210094]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_x2an7")
+script = ExtResource("1_i7fj7")
+this_scene = ExtResource("3_0y8o8")
+
+[connection signal="gui_input" from="TextureRect" to="TextureRect" method="_on_gui_input"]

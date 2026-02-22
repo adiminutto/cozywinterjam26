@@ -1,9 +1,9 @@
 extends Control
 class_name Tools
 
-@onready var place_button: Button = $ButtonBox/PlaceButton
-@onready var move_button: Button = $ButtonBox/MoveButton
-@onready var erase_button: Button = $ButtonBox/EraseButton
+@onready var place_button: Button = $Panel/ButtonBox/PlaceButton
+@onready var move_button: Button = $Panel/ButtonBox/MoveButton
+@onready var erase_button: Button = $Panel/ButtonBox/EraseButton
 @onready var editor_object: EditorObject = $"../../EditorObject"
 
 func _ready() -> void:

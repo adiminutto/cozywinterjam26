@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://djwjfxdadnk6p"]
+
+[ext_resource type="Texture2D" uid="uid://hu7lx5l418k5" path="res://assets/tileset/chair_blue.png" id="1_07g2e"]
+[ext_resource type="Script" uid="uid://vji6jxpip2u3" path="res://scenes/objects/menu_textures/texture_rect.gd" id="2_uqp5q"]
+[ext_resource type="PackedScene" uid="uid://c2pota1pljpm1" path="res://scenes/objects/item_objects/item_chair_blue.tscn" id="3_xufjh"]
+
+[node name="ChairBlueTexture" type="Control" unique_id=1131105540]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=476210094]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_07g2e")
+script = ExtResource("2_uqp5q")
+this_scene = ExtResource("3_xufjh")
+
+[connection signal="gui_input" from="TextureRect" to="TextureRect" method="_on_gui_input"]

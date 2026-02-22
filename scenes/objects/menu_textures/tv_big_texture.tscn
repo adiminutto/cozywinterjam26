@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bsnrende4kf0r"]
+
+[ext_resource type="Texture2D" uid="uid://dn6qopcob1lwn" path="res://assets/tileset/tv_wide.png" id="1_oeb8e"]
+[ext_resource type="Script" uid="uid://vji6jxpip2u3" path="res://scenes/objects/menu_textures/texture_rect.gd" id="1_ormnv"]
+[ext_resource type="PackedScene" uid="uid://dr17krcgo2qqw" path="res://scenes/objects/item_objects/item_tv_big.tscn" id="3_jttd7"]
+
+[node name="TVBigTexture" type="Control" unique_id=1131105540]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=476210094]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_oeb8e")
+script = ExtResource("1_ormnv")
+this_scene = ExtResource("3_jttd7")
+
+[connection signal="gui_input" from="TextureRect" to="TextureRect" method="_on_gui_input"]

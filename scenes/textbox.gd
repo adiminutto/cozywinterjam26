@@ -4,6 +4,8 @@ extends CanvasLayer
 @onready var start: Label = $TextboxContainer/MarginContainer/HBoxContainer/Start
 @onready var end: Label = $TextboxContainer/MarginContainer/HBoxContainer/End
 @onready var label: Label = $TextboxContainer/MarginContainer/HBoxContainer/Label
+@onready var portrait_ui: MarginContainer = $"../CanvasLayer/PortraitUi"
+@onready var portrait: TextureRect = $"../CanvasLayer/PortraitUi/Panel/Portrait"
 
 ## TODO: ADD PORTRAIT NEXT TO TEXT BOX
 ## TODO: ADD NAME NEXT TO TEXT BOX
@@ -17,6 +19,7 @@ enum State {
 
 var current_state = State.READY
 var text_queue = []
+var portrait_queue = []
 
 var tween = create_tween()
 
@@ -50,6 +53,19 @@ func _ready() -> void:
 func queue_text(next_text):
 	text_queue.push_back(next_text)
 
+func queue_portrait(next_portrait):
+	if next_portrait:
+		portrait_queue.push_back(next_portrait)
+	else:
+		portrait_queue.push_back(null)
+
+func queue_dialogue(next_text, new_portrait=null):
+	queue_text(next_text)
+	if new_portrait:
+		queue_portrait(new_portrait)
+	else:
+		queue_portrait(null)
+	
 func hide_textbox():
 	start.text = ""
 	end.text = ""
@@ -62,6 +78,13 @@ func show_textbox():
 
 func display_text():
 	var next_text = text_queue.pop_front()
+	var next_portrait = portrait_queue.pop_front()
+	if not next_portrait:
+		portrait_ui.hide()
+	else:
+		portrait.texture = next_portrait
+		portrait_ui.show()
+		
 	label.text = next_text
 	change_state(State.READING)
 	show_textbox()

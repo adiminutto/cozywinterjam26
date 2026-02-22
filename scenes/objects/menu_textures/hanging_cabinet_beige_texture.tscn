@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c3porcyvuehjx"]
+
+[ext_resource type="Texture2D" uid="uid://70pml7tt5xn4" path="res://assets/tileset/hanging_cabinet_beige.png" id="1_6ugfd"]
+[ext_resource type="Script" uid="uid://vji6jxpip2u3" path="res://scenes/objects/menu_textures/texture_rect.gd" id="1_fpkv2"]
+[ext_resource type="PackedScene" uid="uid://buwna6ap8yt7w" path="res://scenes/objects/item_objects/item_hanging_cabinet_beige.tscn" id="3_taplt"]
+
+[node name="HangingCabinetBeigeTexture" type="Control" unique_id=1131105540]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=476210094]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_6ugfd")
+script = ExtResource("1_fpkv2")
+this_scene = ExtResource("3_taplt")
+
+[connection signal="gui_input" from="TextureRect" to="TextureRect" method="_on_gui_input"]

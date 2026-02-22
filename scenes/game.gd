@@ -3,13 +3,35 @@ class_name Game
 
 @onready var textbox: CanvasLayer = $Textbox
 @onready var level: Level = $Level
+@onready var funds_label: Label = $CanvasLayer/Funds/Panel/FundsLabel
+
+@onready var decoration_shop: Control = $CanvasLayer/DecorationShop
+@onready var tools: Tools = $CanvasLayer/Tools
+@onready var funds_ui: Control = $CanvasLayer/Funds
 @onready var submit_ui: MarginContainer = $CanvasLayer/SubmitUi
+@onready var open_journal_ui: MarginContainer = $CanvasLayer/OpenJournalUi
+const ROX_WADDLES_PORTRAIT = preload("uid://rtiqyfjl86kk")
+const ASSISTANT_PORTRAIT = preload("uid://ciqiw1l7sd7pd")
+const BOSS_PORTRAIT = preload("uid://cduw21ulvmwhq")
+@onready var portrait: TextureRect = $CanvasLayer/PortraitUi/Panel/Portrait
+@onready var portrait_ui: MarginContainer = $CanvasLayer/PortraitUi
+@onready var restart_ui: MarginContainer = $CanvasLayer/RestartUi
+@onready var next_client_button: Button = $CanvasLayer/RestartUi/MarginContainer/HBoxContainer/NextClientButton
+@onready var restart_button: Button = $CanvasLayer/RestartUi/MarginContainer/HBoxContainer/RestartButton
 
 var clients: Array[Client] = []
 
 var score
 var player
 var client
+
+var tween: Tween
+
+var fake_funds: int: set = _on_fake_funds_set
+
+func _on_fake_funds_set(funds):
+	fake_funds = funds
+	funds_label.text = "$"+str(int(fake_funds))
 ###
 # TODO: Script the tile map layer
 ###
@@ -19,10 +41,17 @@ func _add_funds(amt) -> void:
 	print(player.funds)
 	var temp_funds = player.funds
 	temp_funds += amt
+	if tween:
+		tween.kill()
 	if temp_funds < 0:
 		EventBus.transaction_success.emit(false)
 	else:
+		temp_funds = player.funds
+		print(temp_funds)
 		player.funds += amt
+		## TODO: ADD MONEY SOUND EFFECT
+		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		tween.tween_property(self, "fake_funds", player.funds, 1.0)
 		EventBus.transaction_success.emit(true)
 
 func _process_submission():
@@ -65,7 +94,13 @@ func _process_submission():
 	
 	var req = client.requirements
 	var player_objects = level.get_children()
+	print(player_objects)
 	player_objects.remove_at(0)
+	player_objects.remove_at(0)
+	player_objects.remove_at(0)
+	player_objects.remove_at(0)
+	player_objects.remove_at(0)
+	print(player_objects)
 	var player_objects_dict = {}
 	for item in player_objects:
 		if not player_objects_dict.has(item.item_type):
@@ -190,59 +225,107 @@ func score_grading():
 		grade = "F"
 	return grade
 
+func hide_level_Ui():
+	submit_ui.hide()
+	decoration_shop.hide()
+	tools.hide()
+	funds_ui.hide()
+	open_journal_ui.hide()
+	portrait_ui.hide()
+	restart_ui.hide()
+	
 func _process(delta: float) -> void:
 	if textbox.has_method("queue_text"):
 		match client.current_state:
 			client.ClientState.INTRO:
 				print(client.intro_dialogue)
+				portrait_ui.show()
 				for text in client.intro_dialogue:
-					textbox.queue_text(text)
+					textbox.queue_dialogue(text, ROX_WADDLES_PORTRAIT)
 				client.change_state(client.ClientState.REQ)
 				pass
 			client.ClientState.REQ:
 				print(client.req_dialogue)
 				for text in client.req_dialogue:
-					textbox.queue_text(text)
+					textbox.queue_dialogue(text, ROX_WADDLES_PORTRAIT)
 				client.change_state(client.ClientState.WAIT)
 			client.ClientState.WAIT:
 				## WAIT FOR PLAYER TO SUBMIT AND FOR EVAL CALCS TO HAPPEN
 				pass
 			client.ClientState.RESPONSE:
 				## SHOW RESPONSES BASED ON PLAYERS EVALUTATION
+				player.grade = score_grading()
+				hide_level_Ui()
+				#portrait.texture = 
+				portrait_ui.show()
+				textbox.queue_dialogue(Definitions.SUBMISSION_DIALOGUE[1], ASSISTANT_PORTRAIT)
+				textbox.queue_dialogue(Definitions.SUBMISSION_DIALOGUE[2] % client.client_name, ASSISTANT_PORTRAIT)
+				textbox.queue_dialogue(Definitions.SUBMISSION_DIALOGUE[3], ASSISTANT_PORTRAIT)
+				## TODO: Display user score
+				## TODO: Add player restart option and player advance option
+				
 				print(client.responses_queue)
 				for category in client.responses_queue:
 					for response in client.responses_queue[category]:
-						textbox.queue_text(response)
-				submit_ui.hide()
-				## TODO: Display user score
-				## TODO: Add player restart option and player advance option
+						textbox.queue_dialogue(response, ROX_WADDLES_PORTRAIT)
+				#await textbox.tween.finished
+				#portrait.texture = 
+				textbox.queue_dialogue(Definitions.SUBMISSION_DIALOGUE[4], ASSISTANT_PORTRAIT)
+				textbox.queue_dialogue(Definitions.SUBMISSION_DIALOGUE[5], ASSISTANT_PORTRAIT)
+				
+				#await textbox.tween.finished
+				#portrait.texture = 
+				textbox.queue_dialogue(Definitions.GRADE_DIALOGUE[player.grade], BOSS_PORTRAIT)
+				
+				#portrait.texture = ASSISTANT_PORTRAIT
+				textbox.queue_dialogue(Definitions.SCORE_DIALOGUE[1], ASSISTANT_PORTRAIT)
+				textbox.queue_dialogue(Definitions.SCORE_DIALOGUE[2] % [score, Definitions.CLIENT_1_MAX_SCORE], ASSISTANT_PORTRAIT)
+				textbox.queue_dialogue(Definitions.SCORE_DIALOGUE[3] % player.grade, ASSISTANT_PORTRAIT)
+				textbox.queue_dialogue(Definitions.SCORE_DIALOGUE[4] % [client.payment * round((score / Definitions.CLIENT_1_MAX_SCORE) * 100), client.payment], ASSISTANT_PORTRAIT)
+				textbox.queue_dialogue(Definitions.SCORE_DIALOGUE[5], ASSISTANT_PORTRAIT)
+				
 				client.change_state(client.ClientState.END)
 			client.ClientState.END:
-				#print("YOUR SCORE: %s" % score)
-				var grade = score_grading()
-				print("Evaluating the design based on the clients requirements you scored %s points out of %s." % [score, Definitions.CLIENT_1_MAX_SCORE])
-				print("That means your overall grade is %s!" % grade)
+				if len(textbox.text_queue) == 0: 
+					restart_ui.show()
+					if next_client_button.is_pressed():
+						restart_ui.hide()
+						if client.client_name == "Rox Waddles":
+							_setup_client("Robin Yoo")
+						elif client.client_name == "Robin Yoo":
+							_setup_client("Bubba and Bessie Tusk")
+						else:
+							restart_ui.hide()
+							textbox.queue_dialogue(Definitions.END_GAME[1], ASSISTANT_PORTRAIT)
+							textbox.queue_dialogue(Definitions.END_GAME[2])
+					if restart_button.is_pressed():
+						pass
 				pass
 	pass
 
 func _ready() -> void:
+	restart_ui.hide()
 	player = Player.new()
+	fake_funds = player.funds
 	print("PLAYER: %s" % player)
 	print(player.funds)
 	EventBus.add_funds.connect(_add_funds)
 	EventBus.submission.connect(_process_submission)
-	client = Client.new()
-	client.dialogue = Definitions.CLIENT_1_DIALOGUE
-	client.requirements = Definitions.CLIENT_1_REQUIREMENTS
-	client.payment = Definitions.CLIENT_1_PAYMENT
-	
 	#call_deferred("client.change_state",)
-	client.change_state(client.ClientState.INTRO)
+	_setup_client("Rox Waddles")
 	#call_deferred(client.queue_up_dialogue(client.intro_dialogue))
 	print("CLIENT: %s" % client)
 	print(client.dialogue)
 	print(client.requirements)
 	print(client.payment)
+
+func _setup_client(client_name):
+	client = Client.new()
+	client.client_name = "Rox Waddles"
+	client.dialogue = Definitions.CLIENT_1_DIALOGUE
+	client.requirements = Definitions.CLIENT_1_REQUIREMENTS
+	client.payment = Definitions.CLIENT_1_PAYMENT
+	client.change_state(client.ClientState.INTRO)
 	
 class Decoration:
 	extends Game
@@ -265,7 +348,7 @@ class Client:
 	# Clients are tiered 1 - 5
 	var tier: int
 	var mood = ""
-	
+	var client_name
 	var dialogue: set = _on_set_text
 	func _on_set_text(dialogue_dict):
 		intro_dialogue = dialogue_dict["intro"]
@@ -319,7 +402,7 @@ class Player:
 	var tier: int = 1 
 	
 	var funds: float = 1000
-	
+	var grade
 	# Dict[String, Array[Decoration]]
 	var decorations: Dictionary = {}
 

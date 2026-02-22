@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b5pnay8ujme27"]
+
+[ext_resource type="PackedScene" uid="uid://hlm6w5oml407" path="res://scenes/objects/item_object.tscn" id="1_jup8r"]
+[ext_resource type="Texture2D" uid="uid://ceike7unprj0d" path="res://assets/tileset/fridge_dispenser.png" id="2_jup8r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bumb7"]
+size = Vector2(32, 64)
+
+[node name="ItemFridgeDispenser" unique_id=197436072 instance=ExtResource("1_jup8r")]
+item_type = "fridge"
+item_tier = 2
+price = 100.0
+valid_tiles = Array[String](["is_floor", "is_wall"])
+
+[node name="ItemSprite" parent="Entity" parent_id_path=PackedInt32Array(1576624140) index="0" unique_id=1781904250]
+texture_filter = 1
+position = Vector2(0, -16)
+texture = ExtResource("2_jup8r")
+
+[node name="CollisionShape2D" parent="Entity" parent_id_path=PackedInt32Array(1576624140) index="1" unique_id=1714787964]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_bumb7")
+
+[connection signal="mouse_entered" from="Entity" to="." method="_on_entity_mouse_entered"]
+[connection signal="mouse_exited" from="Entity" to="." method="_on_entity_mouse_exited"]

@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ywq3v5ws661l" path="res://scenes/tools.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://c02ar4dltls45" path="res://scenes/textbox.tscn" id="8_gee14"]
 [ext_resource type="FontFile" uid="uid://tga5xnrid4sp" path="res://assets/font/Born2bSportyV2.ttf" id="9_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://rtiqyfjl86kk" path="res://assets/tileset/RoxWaddlesPortrait.png" id="10_kvpfn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("3_lnu2h")
@@ -99,6 +100,14 @@ custom_data_layer_0/name = "player_placed"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_iywne")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dinhu"]
+bg_color = Color(0.90921855, 0.85890764, 0.62386924, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gee14"]
 bg_color = Color(0.4132716, 0.6385213, 0.71962535, 1)
 border_width_left = 8
@@ -127,6 +136,44 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvuet"]
+bg_color = Color(0.96484095, 0.8089373, 0.83078235, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trtic"]
+bg_color = Color(0.90921855, 0.85890764, 0.62386924, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir15t"]
+bg_color = Color(0.34777153, 0.6829646, 0.46699977, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ca42v"]
+bg_color = Color(0.34777153, 0.6829646, 0.46699977, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.90921855, 0.85890764, 0.62386924, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rysoc"]
+bg_color = Color(0.7096089, 0.2961874, 0.39073408, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssvqc"]
+bg_color = Color(0.7096089, 0.2961874, 0.39073408, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.90921855, 0.85890764, 0.62386924, 1)
+
 [node name="Game" type="Node" unique_id=296375991]
 script = ExtResource("1_uwrxv")
 
@@ -147,40 +194,47 @@ script = ExtResource("6_p57ef")
 script = ExtResource("6_vtaks")
 
 [node name="DecorationShop" parent="CanvasLayer" unique_id=1564680268 instance=ExtResource("4_lbhrr")]
-offset_left = 755.0
+offset_left = 753.0
 offset_top = 95.0
-offset_right = -6.0
+offset_right = -8.0
 offset_bottom = -15.0
 
 [node name="Tools" parent="CanvasLayer" unique_id=662143022 instance=ExtResource("7_u5sy4")]
+offset_left = 782.0
+offset_right = 968.0
 
 [node name="Funds" type="Control" parent="CanvasLayer" unique_id=53780659]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1041.0
-offset_top = 42.0
-offset_right = 1141.0
-offset_bottom = 82.0
+offset_left = 991.0
+offset_top = 43.0
+offset_right = 1091.0
+offset_bottom = 83.0
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Funds" unique_id=583105465]
 layout_mode = 0
-offset_right = 99.0
-offset_bottom = 40.0
+offset_left = -4.0
+offset_top = -34.0
+offset_right = 159.0
+offset_bottom = 49.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dinhu")
 
-[node name="Label" type="Label" parent="CanvasLayer/Funds/Panel" unique_id=1592864301]
+[node name="FundsLabel" type="Label" parent="CanvasLayer/Funds/Panel" unique_id=1592864301]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -39.5
-offset_top = -11.5
-offset_right = 41.5
-offset_bottom = 11.5
+anchor_bottom = 1.0
+offset_left = -54.5
+offset_top = -71.0
+offset_right = 54.5
 grow_horizontal = 2
-grow_vertical = 2
-text = "1000"
+grow_vertical = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 70
+text = "$1000"
 horizontal_alignment = 1
 
 [node name="ClientHistoryRox" type="MarginContainer" parent="CanvasLayer" unique_id=261009347]
@@ -459,10 +513,10 @@ theme_override_font_sizes/font_size = 24
 text = "{>.<}"
 
 [node name="SubmitUi" type="MarginContainer" parent="CanvasLayer" unique_id=1284735427]
-offset_left = 819.0
-offset_top = 530.0
-offset_right = 1077.0
-offset_bottom = 594.0
+offset_left = 830.0
+offset_top = 409.0
+offset_right = 1088.0
+offset_bottom = 473.0
 
 [node name="Panel" type="Panel" parent="CanvasLayer/SubmitUi" unique_id=1594788431]
 layout_mode = 2
@@ -512,5 +566,73 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("9_0tnpc")
 theme_override_font_sizes/font_size = 24
 text = "{>.<}"
+
+[node name="PortraitUi" type="MarginContainer" parent="CanvasLayer" unique_id=939993097]
+offset_left = 23.0
+offset_top = 494.0
+offset_right = 178.0
+offset_bottom = 633.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PortraitUi" unique_id=1090963778]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kvuet")
+
+[node name="Portrait" type="TextureRect" parent="CanvasLayer/PortraitUi/Panel" unique_id=1518310722]
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 147.0
+offset_bottom = 131.0
+texture = ExtResource("10_kvpfn")
+
+[node name="RestartUi" type="MarginContainer" parent="CanvasLayer" unique_id=536248189]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -269.0
+offset_top = -198.0
+offset_right = 269.0
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 4
+
+[node name="Panel" type="Panel" parent="CanvasLayer/RestartUi" unique_id=1440904219]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_trtic")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/RestartUi" unique_id=1475102288]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/RestartUi/MarginContainer" unique_id=1853631245]
+layout_mode = 2
+
+[node name="NextClientButton" type="Button" parent="CanvasLayer/RestartUi/MarginContainer/HBoxContainer" unique_id=2056217675]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_ir15t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ca42v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ca42v")
+text = "NEXT CLIENT"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/RestartUi/MarginContainer/HBoxContainer" unique_id=107545126]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_rysoc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ssvqc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ssvqc")
+text = "RESTART"
 
 [node name="Textbox" parent="." unique_id=1394967784 instance=ExtResource("8_gee14")]
